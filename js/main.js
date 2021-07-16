@@ -102,6 +102,8 @@
     var count = 0,
         count2 = 0;
     var respuesta = $('.result');
+
+    // ***************************************************************************************************************************
     $(document).on("submit", "#form", function(evt) {
         evt.preventDefault();
         // ELEMENTOS OBLIGATORIOS
@@ -168,23 +170,196 @@
 
 
         // ASIGNACION DE VALORES NO OBLIGATORIOS EN ARRAY, NO IMPORTA QUE SEA VACIO
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
         inputs.middle = middle_name;
         inputs.address2 = address2;
+        inputs.today = today;
 
 
         console.log(count, count2)
         console.log(inputs)
         if (count == 0 && count2 == -19) {
             // LOS DATOS HAN SIDO VALIDADOS
+            demoFromHTML();  
             respuesta.hide(500);
         }
-        else{
+        else{ 
             console.log("entro")
             respuesta.show(500);
         }
         count2 = 0;
     });
+    // ***************************************************************************************************************************
 
+
+    function demoFromHTML() {
+        var doc = new jsPDF('p', 'pt', 'letter');        
+        doc.setFontSize(18);
+        doc.text(260, 50, 'Authorization');
+        doc.setLineWidth(1);
+        doc.line(70, 55, 542, 55); 
+        doc.setFontSize(12);
+        doc.setFontType('bold');
+        doc.text(70, 85, 'Authorization');
+        doc.setLineWidth(0.5);
+        doc.line(70, 88, 150, 88);
+        doc.setFontType("normal");
+        doc.text(147, 85, ':  By signing below, you authorize: (a) backgroundchecks.com ( “BGC” ) to');
+        doc.text(70, 100, 'request information about you from any public or private information source;(b) anyone to');
+        doc.text(70, 115, 'provide  information  about  you  to BGC; (c) BGC  to  provide  us My Mobile, LLC and its');
+        doc.text(70, 130, 'client, TracFone Wireless, Inc., one or more reports based on that information; and (d) us');
+        doc.text(70, 145, 'to share  those reports with  others for legitimate  business purposes related  to your em-');
+        doc.text(70, 160, 'ployment.  BGC may investigate your education,  work history,  professional licenses and');
+        doc.text(70, 175, 'credentials,  references,  address history,  social security number validity,  right  to  work,');
+        doc.text(70, 190, 'criminal record, lawsuits, driving record, credit history, and any other information with pu-');
+        doc.text(70, 205, 'blic  or  private  information  sources.  You  acknowledge  that  a  fax,  image,  or copy of');
+        doc.text(70, 220, 'this authorization is as valid as the original. You make this authorization to be valid for as');
+        doc.text(70, 235, 'long as you are an applicant or employee with us.');
+        doc.text(70, 265, 'The  Consumer  Financial  Protection  Bureau ’s  “Summary  of  Your  Rights  under  the');
+        doc.text(70, 280, 'Fair Credit  Reporting  Act”  is  attached  to  this  authorization. If  you  are  a  New  York');
+        doc.text(70, 295, 'applicant, a  copy  of  New York’s  law on  the use  of  criminal  records  is  attached.  By');
+        doc.text(70, 310, 'signing below, you acknowledge receipt of these documents.');
+
+        doc.setFontType('bold');
+        doc.text(70, 340, 'Personal  Information');
+        doc.line(70, 343, 197, 343);
+        doc.setFontType("normal");
+        doc.text(194, 340, ': Please print the information requested below to identify yourself');
+        doc.text(70, 355, 'for BGC.');
+        doc.setFontSize(11);
+        doc.text(70, 380, 'Printed name: ');
+        doc.setFontSize(9);
+        doc.text(190, 380, inputs.name);
+        if(inputs.middle != "")
+        {
+            doc.text(265, 380, inputs.middle); 
+        } 
+        doc.text(390, 380, inputs.last_name);
+        doc.line(190, 383, 542, 383);
+        doc.text(190, 395, 'First');
+        doc.text(265, 395, 'Middle');
+        doc.text(390, 395, 'Last');
+
+        doc.setFontSize(11);
+        doc.text(70, 415, 'Other names used: ');
+        doc.setFontSize(9);
+        if(inputs.middle != "") //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPO OTHERNAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        {
+            doc.text(190, 415, inputs.middle);
+        } 
+        doc.line(190, 418, 542, 418);
+
+        doc.setFontSize(11);
+        doc.text(70, 435, 'Current and former addresses: ');
+
+        doc.setFontSize(10);
+        //470
+        doc.text(70, 470, inputs.month2 + "/" + inputs.year2); doc.text(180, 470, 'current'); doc.text(290, 470, inputs.address + ', ' + inputs.city + ', ' + inputs.state + ' ' + inputs.zip);
+        doc.line(70, 473, 160, 473); doc.line(180, 473, 270, 473); doc.line(290, 473, 542, 473);
+        doc.text(70, 484, 'from Mo/Yr'); doc.text(180, 484, 'to Mo/Yr '); doc.text(290, 484, 'Street'); doc.text(455, 484, 'City, State & Zip');
+        //505
+        //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPOS DE DIRECCION2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        doc.line(70, 508, 160, 508); doc.line(180, 508, 270, 508); doc.line(290, 508, 542, 508);
+        doc.text(70, 519, 'from Mo/Yr'); doc.text(180, 519, 'to Mo/Yr '); doc.text(290, 519, 'Street'); doc.text(455, 519, 'City, State & Zip');
+        //540
+        //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPOS DE DIRECCION3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        doc.line(70, 543, 160, 543); doc.line(180, 543, 270, 543); doc.line(290, 543, 542, 543);
+        doc.text(70, 554, 'from Mo/Yr'); doc.text(180, 554, 'to Mo/Yr '); doc.text(290, 554, 'Street'); doc.text(455, 554, 'City, State & Zip');
+
+        doc.addImage(signature, 'PNG', 110, 590, 116, 116);
+        doc.line(70, 709, 276, 709);
+        doc.text(70, 720, 'Signature');
+
+        doc.text(336, 706, inputs.today);
+        doc.line(336, 709, 542, 709);
+        doc.text(336, 720, 'Date');
+
+        // ******************** NUEVA PAGINA ********************
+        doc.addPage();
+        doc.setFontSize(18);
+        doc.text(265, 50, 'Disclosure');
+        doc.setLineWidth(1);
+        doc.line(70, 55, 542, 55); 
+        doc.setFontSize(12);
+        doc.text(70, 85, 'We');
+        doc.setFontType('bold');
+        doc.text(92, 85, 'My Mobile, LLC');
+        doc.setFontType("normal");
+        doc.text(184 , 85, 'and our client, TracFone Wireless, Inc., will obtain one or more con-');
+        doc.text(70, 100, 'sumer  reports  or  investigative  consumer  reports (or both) about  you  for  purposes  of');
+        doc.text(70, 115, 'employment with');
+        doc.setFontType('bold');
+        doc.text(164, 115, 'My Mobile, LLC');
+        doc.setFontType("normal");
+        doc.text(254 , 115, ' and  potential assignment  to work on  projects for our');
+        doc.text(70, 130, 'client  TracFone  Wireless,  Inc. These  purposes  may  include  hiring,  contract,  assign-');
+        doc.text(70, 145, 'ment,  promotion,  re-assignment,  and termination.  The reports  will include  information');
+        doc.text(70, 160, 'about your character, general reputation, personal characteristics, and mode of living.');
+        doc.text(70, 185, 'We will obtain these reports through a consumer reporting agency.  Our consumer repor-');
+        doc.text(70, 200, 'ting agency is backgroundchecks.com (“BGC”). BGC’s address is P.O. Box 353, Chapin,');
+        doc.text(70, 215, 'blic  or  private  information  sources.  You  acknowledge  that  a  fax,  image,  or copy of');
+        doc.text(70, 230, 'SC   29036.   BGC ’s   telephone   number   is   (866)   265 - 6602.   BGC ’s   website   is');
+        doc.text(70, 245, 'www.backgroundchecks.com,  where  you  can  find  information  about  whether  BGC’s');
+        doc.text(70, 260, 'international privacy practices.');
+        doc.text(70, 285, 'To prepare the reports,  BGC may investigate your education, work history,  professional');
+        doc.text(70, 300, 'licenses  and  credentials, references, address  history,  social  security  number  validity,');
+        doc.text(70, 315, 'right  to  work,  criminal  record,  lawsuits,  driving  record,  credit  history, and  any  other');
+        doc.text(70, 330, 'with public or private information sources.');
+        doc.text(70, 355, 'You  may  obtain  a copy of  any  report  that BGC  provides and  BGC’s files  about  you');
+        doc.text(70, 370, 'in  person, by  mail, or  by  phone)  by  providing  dentification  to  BGC. If  you  do, BGC');
+        doc.text(70, 385, 'tion of any codes. Another person may accompany you by providing identification.');
+        doc.text(70, 410, 'If BGC obtains any information by interview, you have the right to obtain a complete and');
+        doc.text(70, 425, 'accurate disclosure of the scope and nature of the investigation performed.');
+        doc.text(70, 450, 'Please sign below to acknowledge your receipt of this disclosure.');
+        doc.setFontSize(10);
+        doc.addImage(signature, 'PNG', 110, 490, 116, 116);
+        doc.line(70, 609, 276, 609);
+        doc.text(70, 620, 'Signature');
+        doc.setFontSize(9);
+        doc.text(336, 606, inputs.today);
+        doc.line(336, 609, 542, 609);
+        doc.text(336, 620, 'Date');
+        if(inputs.middle != "")
+        {
+            doc.text(70, 666, (inputs.name + ' ' + inputs.middle + ' ' + inputs.last_name));
+        } 
+        else
+        {
+            doc.text(70, 666, (inputs.name + ' ' + inputs.last_name));
+        }
+        doc.line(70, 669, 276, 669);
+        doc.text(70, 680, 'Printed Name');
+         
+        // ******************** NUEVA PAGINA ********************
+        doc.addPage();
+        doc.setFontSize(18);
+        doc.text(265, 50, 'Information');
+        doc.setLineWidth(1);
+        doc.line(70, 55, 542, 55); 
+        doc.setFontSize(12);
+        if(inputs.middle != "")
+        {
+            doc.text(70, 85, ('Full name: ' + inputs.name + ' ' + inputs.middle + ' ' + inputs.last_name));
+        } 
+        else
+        {
+            doc.text(70, 85, ('Full name: ' + inputs.name + ' ' + inputs.last_name));
+        }
+        doc.text(70, 100, ('SSN: ' + inputs.ssn));
+        doc.text(70, 115, ('Date of birth: ' + inputs.month + '/' + inputs.day + '/' + inputs.year));
+        doc.text(70, 130, ('Gender: ' + inputs.gender));
+        doc.text(70, 145, ('Phone: ' + inputs.phone));
+        doc.text(70, 160, ('Email: ' + inputs.email));
+        doc.text(70, 175, ('Phone: ' + inputs.phone));
+        doc.text(70, 190, ('T-shirt size: ' + inputs.size));
+
+        doc.save('Test.pdf');
+    }
 
     function ValidarInput(value, element, name) {
         if (value == "" || value == "default") {
