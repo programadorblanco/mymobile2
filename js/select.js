@@ -43,20 +43,10 @@
     gender.append("<option value='Man'>Man</option>");
     gender.append("<option value='Woman'>Woman</option>");
 
-    // CERRAR POPUP
-    let txtAccept = document.querySelector('#txtAccept');
-    var popup = document.querySelector('.popup');
-    txtAccept.addEventListener('click', function() {
-        $(popup).hide(500);
-    });
 
-    // STATE
+    // SIZE
     let sizes = $('#sizes');
     let arraySizes = ["XS", "S", "M", "L", "XL", "XXL"];
     arraySizes.forEach(valor => {
         sizes.append("<option value='" + valor + "'>" + valor + "</option>");
-    });
-
-    $('#txtSendImage').click(function() {
-        $('.popup-image').hide(500);
     });

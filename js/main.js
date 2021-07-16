@@ -101,6 +101,7 @@
     var signature;
     var count = 0,
         count2 = 0;
+    var respuesta = $('.result');
     $(document).on("submit", "#form", function(evt) {
         evt.preventDefault();
         // ELEMENTOS OBLIGATORIOS
@@ -175,6 +176,11 @@
         console.log(inputs)
         if (count == 0 && count2 == -19) {
             // LOS DATOS HAN SIDO VALIDADOS
+            respuesta.hide(500);
+        }
+        else{
+            console.log("entro")
+            respuesta.show(500);
         }
         count2 = 0;
     });
