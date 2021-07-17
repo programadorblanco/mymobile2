@@ -42,6 +42,12 @@
                     <div><input name="lName" id="lName" type="text" class="input" placeholder="Enter Last Name" autocomplete="nope"></div>
                 </div>
             </div>
+            <div class="box _other-name">
+                <div class="flex">
+                    <div><label>Other Name</label></div>
+                    <div><input name="lName" id="other-name" type="text" class="input" placeholder="Enter Other Name" autocomplete="nope"></div>
+                </div>
+            </div>
             <div class="box _ssn">
                 <div class="flex">
                     <div><label>SSN (full 9 digits)</label></div>
@@ -123,10 +129,11 @@
                     </div>
                 </div>
             </div>
+            <hr style="margin-bottom: 20px; margin-top: 20px;">
             <div class="box _address">
                 <div class="flex">
                     <div><label>Current Address</label></div>
-                    <div><input name="address" id="address" type="text" class="input" placeholder="Enter Address" autocomplete="nope"></div>
+                    <div><input name="address" id="address" type="text" class="input" placeholder="Enter Street" autocomplete="nope"></div>
                 </div>
             </div>
             <div class="box _day2">
@@ -145,13 +152,14 @@
             <div class="box _address2">
                 <div class="flex">
                     <div><label>Address 2</label></div>
-                    <div><input name="address2" type="text" class="input" autocomplete="nope" placeholder="Enter Address 2" id="address-2"></div>
+                    <div><input name="address2" type="text" class="input" autocomplete="nope" placeholder="APT/Bldg" id="address-2"></div>
                 </div>
             </div>
+            
             <div class="box _city">
                 <div class="flex">
                     <div><label>City</label></div>
-                    <div><input name="city" autocomplete="nope" type="text" id="city" class="input" placeholder="Enter City"></div>
+                    <div><input name="city" autocomplete="nope" type="text" id="city" class="input" placeholder="Los Angeles"></div>
                 </div>
             </div>
             <div class="box _state">
@@ -167,9 +175,143 @@
             <div class="box _zipcode">
                 <div class="flex">
                     <div><label>Zip Code</label></div>
-                    <div><input name="zipCode" autocomplete="nope" type="number" id="zipcode" class="input" placeholder="Enter Zip Code"></div>
+                    <div><input name="zipCode" autocomplete="nope" type="number" id="zipcode" class="input" placeholder="90010"></div>
                 </div>
             </div>
+
+            <hr style="margin-bottom: 20px; margin-top: 20px;">
+
+            <!-- SEGUNDA DIRECCION -->
+            <div class="box _address">
+                <div class="flex">
+                    <div><label>Other Street</label></div>
+                    <div><input name="address" id="address_3" type="text" class="input" placeholder="Enter Street" autocomplete="nope"></div>
+                </div>
+            </div>
+            <div class="box _day2">
+                <div class="flex">
+                    <div><label>When did you start living here?</label></div>
+                    <div class="container-select">
+                        <select class="select" id="month_3" name="month_3">
+                                <option value="">Month</option>
+                            </select>
+                        <select class="select" id="year_3" name="year_3">
+                                <option value="">Year</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box _day2">
+                <div class="flex">
+                    <div><label>When did you end living here?</label></div>
+                    <div class="container-select">
+                        <select class="select" id="month_3-03" name="month_3-03">
+                                <option value="">Month</option>
+                            </select>
+                        <select class="select" id="year_3-03" name="year_3-03">
+                                <option value="">Year</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box _address2">
+                <div class="flex">
+                    <div><label>Address 2</label></div>
+                    <div><input name="address2_3" type="text" class="input" autocomplete="nope" placeholder="APT/Bldg" id="address-2_3"></div>
+                </div>
+            </div>
+            
+            <div class="box _city">
+                <div class="flex">
+                    <div><label>City</label></div>
+                    <div><input name="city" autocomplete="nope" type="text" id="city_3" class="input" placeholder="Los Angeles"></div>
+                </div>
+            </div>
+            <div class="box _state">
+                <div class="flex">
+                    <div><label>State</label></div>
+                    <div class="container-select">
+                        <select class="select state" id="state_3" name="state_3">
+                                <option value="">Select Value</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box _zipcode">
+                <div class="flex">
+                    <div><label>Zip Code</label></div>
+                    <div><input name="zipCode" autocomplete="nope" type="number" id="zipcode_3" class="input" placeholder="90010"></div>
+                </div>
+            </div>
+            <!-- TERMINA -->
+
+            <hr style="margin-bottom: 20px; margin-top: 20px;">
+
+            <!-- TERCERA DIRECCION -->
+            <div class="box _address">
+                <div class="flex">
+                    <div><label>Other Street</label></div>
+                    <div><input name="address" id="address_4" type="text" class="input" placeholder="Enter Street" autocomplete="nope"></div>
+                </div>
+            </div>
+            <div class="box _day2">
+                <div class="flex">
+                    <div><label>When did you start living here?</label></div>
+                    <div class="container-select">
+                        <select class="select" id="month_4" name="month_4">
+                                <option value="">Month</option>
+                            </select>
+                        <select class="select" id="year_4" name="year_4">
+                                <option value="">Year</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box _day2">
+                <div class="flex">
+                    <div><label>When did you end living here?</label></div>
+                    <div class="container-select">
+                        <select class="select" id="month_3-04" name="month_3-04">
+                                <option value="">Month</option>
+                            </select>
+                        <select class="select" id="year_3-04" name="year_3-04">
+                                <option value="">Year</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box _address2">
+                <div class="flex">
+                    <div><label>Address 2</label></div>
+                    <div><input name="address2_4" type="text" class="input" autocomplete="nope" placeholder="APT/Bldg" id="address-2_4"></div>
+                </div>
+            </div>
+
+            <div class="box _city">
+                <div class="flex">
+                    <div><label>City</label></div>
+                    <div><input name="city" autocomplete="nope" type="text" id="city_4" class="input" placeholder="Los Angeles"></div>
+                </div>
+            </div>
+            <div class="box _state">
+                <div class="flex">
+                    <div><label>State</label></div>
+                    <div class="container-select">
+                        <select class="select state" id="state_4" name="state_4">
+                                <option value="">Select Value</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box _zipcode">
+                <div class="flex">
+                    <div><label>Zip Code</label></div>
+                    <div><input name="zipCode" autocomplete="nope" type="number" id="zipcode_4" class="input" placeholder="90010"></div>
+                </div>
+            </div>
+            <!-- TERMINA -->
+
+
             <div class="box _signature">
                 <div class="sub-box">
                     <canvas width="290px" height="290px"></canvas>

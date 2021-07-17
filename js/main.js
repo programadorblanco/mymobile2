@@ -99,6 +99,7 @@
     // VARIABLES GLOBALES
     var inputs = {};
     var signature;
+    var expresionn, expresionn2, expresionn3;
     var count = 0,
         count2 = 0;
     var respuesta = $('.result');
@@ -132,9 +133,56 @@
         let txtSelfie = $('#lbl-selfie');
         signature = canvas.toDataURL("image/png");
 
+        // VARIABLES PARA LAS OTRAS DIRECCIONES
+        let address3 = $('#address_3').val();
+        let city3 = $('#city_3').val();
+        let zip_code3 = $('#zipcode_3').val();
+        let month3 = $('#month_3').val();
+        let year3 = $('#year_3').val();
+        let month3__1 = $('#month_3-03').val();
+        let year3__1 = $('#year_3-03').val();
+        let address2_3 = $('#address-2_3').val();
+        let state3 = $('#state_3').val();
+
+        // INSERTAR DATOS DE LA SEGUNDA DIRECCION 
+        // NO IMPORTA QUE ESTEN VACIOS
+        inputs.address3 = address3;
+        inputs.city3 = city3;
+        inputs.zip_code3 = zip_code3;
+        inputs.month3 = month3;
+        inputs.year3 = year3;
+        inputs.address2_3 = address2_3;
+        inputs.state3 = state3;
+        inputs.month3__1 = month3__1;
+        inputs.year3__1 = year3__1;
+
+        // VARIABLES PARA LAS OTRAS DIRECCIONES
+        let address4 = $('#address_4').val();
+        let city4 = $('#city_4').val();
+        let zip_code4 = $('#zipcode_4').val();
+        let month4 = $('#month_4').val();
+        let year4 = $('#year_4').val();
+        let month4__1 = $('#month_3-04').val();
+        let year4__1 = $('#year_3-04').val();
+        let address2_4 = $('#address-2_4').val();
+        let state4 = $('#state_4').val();
+
+        // INSERTAR DATOS DE LA TERCERA DIRECCION 
+        // NO IMPORTA QUE ESTEN VACIOS
+        inputs.address4 = address4;
+        inputs.city4 = city4;
+        inputs.zip_code4 = zip_code4;
+        inputs.month4 = month4;
+        inputs.year4 = year4;
+        inputs.address2_4 = address2_4;
+        inputs.state4 = state4;
+        inputs.month4__1 = month4__1;
+        inputs.year4__1 = year4__1;
+
         // ELEMENTOS NO OBLIGATORIOS
         let middle_name = $('#middleName').val();
         let address2 = $('#address-2').val();
+        let other_name = $('#other-name').val();
 
         // VALIDAR FIRMA
         if (signature == validateSignature) {
@@ -167,8 +215,6 @@
         ValidarInput(id_back, txtBack, "back");
         ValidarInput(id_selfie, txtSelfie, "selfie");
 
-
-
         // ASIGNACION DE VALORES NO OBLIGATORIOS EN ARRAY, NO IMPORTA QUE SEA VACIO
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
@@ -178,12 +224,14 @@
         today = mm + '/' + dd + '/' + yyyy;
         inputs.middle = middle_name;
         inputs.address2 = address2;
+        inputs.other_name = other_name;
         inputs.today = today;
 
+        count3 = extensionImage();
 
         console.log(count, count2)
         console.log(inputs)
-        if (count == 0 && count2 == -19) {
+        if (count == 0 && count2 == -19 && count3 == true) {
             // LOS DATOS HAN SIDO VALIDADOS
             demoFromHTML();  
             respuesta.hide(500);
@@ -196,6 +244,64 @@
     });
     // ***************************************************************************************************************************
 
+    function extensionImage()
+    {
+        var fileInput = document.getElementById('txtFileID');
+        var filePath = fileInput.value;
+        var fileInput2 = document.getElementById('txtFileIDback');
+        var filePath2 = fileInput2.value;
+        var fileInput3 = document.getElementById('txtFileSelfie');
+        var filePath3 = fileInput3.value;
+
+        var allowedExtensions = /(.jpg)$/i;
+        var allowedExtensions2 = /(.jpeg)$/i;
+
+        if(allowedExtensions.exec(filePath))
+        {
+            console.log('.jpg');
+            expresionn = 'JPG';
+        }
+        else if(allowedExtensions2.exec(filePath))
+        {
+            console.log('.jpeg');
+            expresionn = 'JPEG';
+        }
+        else
+        {
+            return false;
+        }
+
+        if(allowedExtensions.exec(filePath2))
+        {
+            console.log('.jpg');
+            expresionn2 = 'JPG';
+        }
+        else if(allowedExtensions2.exec(filePath2))
+        {
+            console.log('.jpeg');
+            expresionn2 = 'JPEG';
+        }
+        else
+        {
+            return false;
+        }
+
+        if(allowedExtensions.exec(filePath3))
+        {
+            console.log('.jpg');
+            expresionn3 = 'JPG';
+        }
+        else if(allowedExtensions2.exec(filePath3))
+        {
+            console.log('.jpeg');
+            expresionn3 = 'JPEG';
+        }else
+        {
+            return false;
+        }
+
+        return true;
+    }
 
     function demoFromHTML() {
         var doc = new jsPDF('p', 'pt', 'letter');        
@@ -224,7 +330,6 @@
         doc.text(70, 280, 'Fair Credit  Reporting  Act”  is  attached  to  this  authorization. If  you  are  a  New  York');
         doc.text(70, 295, 'applicant, a  copy  of  New York’s  law on  the use  of  criminal  records  is  attached.  By');
         doc.text(70, 310, 'signing below, you acknowledge receipt of these documents.');
-
         doc.setFontType('bold');
         doc.text(70, 340, 'Personal  Information');
         doc.line(70, 343, 197, 343);
@@ -248,9 +353,9 @@
         doc.setFontSize(11);
         doc.text(70, 415, 'Other names used: ');
         doc.setFontSize(9);
-        if(inputs.middle != "") //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPO OTHERNAME !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if(inputs.other_name != "")
         {
-            doc.text(190, 415, inputs.middle);
+            doc.text(190, 415, inputs.other_name);
         } 
         doc.line(190, 418, 542, 418);
 
@@ -259,15 +364,16 @@
 
         doc.setFontSize(10);
         //470
-        doc.text(70, 470, inputs.month2 + "/" + inputs.year2); doc.text(180, 470, 'current'); doc.text(290, 470, inputs.address + ', ' + inputs.city + ', ' + inputs.state + ' ' + inputs.zip);
+        doc.text(70, 470, inputs.month2 + "/" + inputs.year2); doc.text(180, 470, 'current'); doc.text(290, 470, inputs.address + ' ' + inputs.address2 + ', ' + inputs.city + ', ' + inputs.state + ' ' + inputs.zip);
         doc.line(70, 473, 160, 473); doc.line(180, 473, 270, 473); doc.line(290, 473, 542, 473);
         doc.text(70, 484, 'from Mo/Yr'); doc.text(180, 484, 'to Mo/Yr '); doc.text(290, 484, 'Street'); doc.text(455, 484, 'City, State & Zip');
-        //505
-        //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPOS DE DIRECCION2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        doc.text(70, 505, inputs.month3 + "/" + inputs.year3); doc.text(180, 505, inputs.month3__1 + "/" + inputs.year3__1); doc.text(290, 505, inputs.address3 + ' ' + inputs.address2_3 + ', ' + inputs.city3 + ', ' + inputs.state3 + ' ' + inputs.zip_code3);
         doc.line(70, 508, 160, 508); doc.line(180, 508, 270, 508); doc.line(290, 508, 542, 508);
         doc.text(70, 519, 'from Mo/Yr'); doc.text(180, 519, 'to Mo/Yr '); doc.text(290, 519, 'Street'); doc.text(455, 519, 'City, State & Zip');
         //540
         //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPOS DE DIRECCION3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        doc.text(70, 540, inputs.month4 + "/" + inputs.year4); doc.text(180, 540, inputs.month4__1 + "/" + inputs.year4__1); doc.text(290, 540, inputs.address4 + ' ' + inputs.address2_4 + ', ' + inputs.city4 + ', ' + inputs.state4 + ' ' + inputs.zip_code4);
         doc.line(70, 543, 160, 543); doc.line(180, 543, 270, 543); doc.line(290, 543, 542, 543);
         doc.text(70, 554, 'from Mo/Yr'); doc.text(180, 554, 'to Mo/Yr '); doc.text(290, 554, 'Street'); doc.text(455, 554, 'City, State & Zip');
 
@@ -344,19 +450,22 @@
         doc.setFontSize(12);
         if(inputs.middle != "")
         {
-            doc.text(70, 85, ('Full name: ' + inputs.name + ' ' + inputs.middle + ' ' + inputs.last_name));
+            doc.text(70, 330, ('Full name: ' + inputs.name + ' ' + inputs.middle + ' ' + inputs.last_name));
         } 
         else
         {
-            doc.text(70, 85, ('Full name: ' + inputs.name + ' ' + inputs.last_name));
+            doc.text(70, 330, ('Full name: ' + inputs.name + ' ' + inputs.last_name));
         }
-        doc.text(70, 100, ('SSN: ' + inputs.ssn));
-        doc.text(70, 115, ('Date of birth: ' + inputs.month + '/' + inputs.day + '/' + inputs.year));
-        doc.text(70, 130, ('Gender: ' + inputs.gender));
-        doc.text(70, 145, ('Phone: ' + inputs.phone));
-        doc.text(70, 160, ('Email: ' + inputs.email));
-        doc.text(70, 175, ('Phone: ' + inputs.phone));
-        doc.text(70, 190, ('T-shirt size: ' + inputs.size));
+        doc.text(70, 345, ('SSN: ' + inputs.ssn));
+        doc.text(70, 360, ('Date of birth: ' + inputs.month + '/' + inputs.day + '/' + inputs.year));
+        doc.text(70, 375, ('Gender: ' + inputs.gender));
+        doc.text(70, 390, ('Phone: ' + inputs.phone));
+        doc.text(70, 405, ('Email: ' + inputs.email));
+        doc.text(70, 420, ('Phone: ' + inputs.phone));
+        doc.text(70, 435, ('T-shirt size: ' + inputs.size));
+        doc.addImage(direccion3, expresionn3, 210, 80, 200, 230);
+        doc.addImage(direccion1, expresionn, 40, 470, 260, 200);
+        doc.addImage(direccion2, expresionn2, 312, 470, 260, 200);
 
         doc.save('Test.pdf');
     }
