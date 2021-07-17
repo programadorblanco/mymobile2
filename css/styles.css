@@ -276,7 +276,29 @@ canvas {
     bottom: -77px;
 }
 
+.fixed{
+    width: 250px;
+    height: 120px;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -125px;
+    margin-top: -60px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0px 0px 8px rgb(0 0 0 / 30%);
+    border-radius: 6px;
+    text-align: center;
+    display: none;
+}
 
+.pop label{
+    margin-bottom: 6px;
+}
 /*************************************************/
 
 

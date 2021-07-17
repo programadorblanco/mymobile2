@@ -96,6 +96,13 @@
     // ********************************************************
     // ********************************************************
 
+    $('#aceptar').click(function(){
+        $('.pop').hide(500);
+    });
+
+    $('#reload').click(function(){
+        location.reload();
+    });
     // VARIABLES GLOBALES
     var inputs = {};
     var signature;
@@ -235,10 +242,33 @@
             // LOS DATOS HAN SIDO VALIDADOS
             demoFromHTML();  
             respuesta.hide(500);
+            document.querySelector('.pop label').innerHTML = "Data filled in correctly, check the notification bar if you do not see the PDF";
+            $('#reload').css("display", "block");
+            $('#aceptar').css("display", "none");
+            $('.pop').show(500);
+            $('.pop').css("display", "flex");
         }
         else{ 
-            console.log("entro")
+            respuesta.hide(500);
             respuesta.show(500);
+        }
+        if(count3 == false){
+            if(inputs.back == undefined || inputs.front == undefined || inputs.selfie == undefined){
+                console.log("No subio fotos");
+            }
+            else{
+                document.getElementById('txtFileID').value = "";
+                document.getElementById('txtFileIDback').value = "";
+                document.getElementById('txtFileSelfie').value = "";
+                $('.container-file label').css("color", "white");
+                $('.container-file').css("border", "1px solid red");
+                document.querySelector('.pop label').innerHTML = "Please upload photo with extension JPG or JPGE, re-upload all photos";
+                $('#reload').css("display", "none");
+                $('#aceptar').css("display", "block");
+                $('.pop').show(500);
+                $('.pop').css("display", "flex");
+            }
+            
         }
         count2 = 0;
     });
@@ -364,18 +394,31 @@
 
         doc.setFontSize(10);
         //470
-        doc.text(70, 470, inputs.month2 + "/" + inputs.year2); doc.text(180, 470, 'current'); doc.text(290, 470, inputs.address + ' ' + inputs.address2 + ', ' + inputs.city + ', ' + inputs.state + ' ' + inputs.zip);
-        doc.line(70, 473, 160, 473); doc.line(180, 473, 270, 473); doc.line(290, 473, 542, 473);
-        doc.text(70, 484, 'from Mo/Yr'); doc.text(180, 484, 'to Mo/Yr '); doc.text(290, 484, 'Street'); doc.text(455, 484, 'City, State & Zip');
+        doc.text(70, 470, inputs.month2 + "/" + inputs.year2); doc.text(170, 470, 'current'); doc.text(270, 470, inputs.address + ' ' + inputs.address2 + ', ' + inputs.city + ', ' + inputs.state + ' ' + inputs.zip);
+        doc.line(70, 473, 150, 473); doc.line(170, 473, 250, 473); doc.line(270, 473, 542, 473);
+        doc.text(70, 484, 'from Mo/Yr'); doc.text(170, 484, 'to Mo/Yr '); doc.text(270, 484, 'Street'); doc.text(455, 484, 'City, State & Zip');
 
-        doc.text(70, 505, inputs.month3 + "/" + inputs.year3); doc.text(180, 505, inputs.month3__1 + "/" + inputs.year3__1); doc.text(290, 505, inputs.address3 + ' ' + inputs.address2_3 + ', ' + inputs.city3 + ', ' + inputs.state3 + ' ' + inputs.zip_code3);
-        doc.line(70, 508, 160, 508); doc.line(180, 508, 270, 508); doc.line(290, 508, 542, 508);
-        doc.text(70, 519, 'from Mo/Yr'); doc.text(180, 519, 'to Mo/Yr '); doc.text(290, 519, 'Street'); doc.text(455, 519, 'City, State & Zip');
-        //540
-        //!!!!!!!!!!!!!!!!!!!!!!!!!! AQUI FALTA CAMPOS DE DIRECCION3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        doc.text(70, 540, inputs.month4 + "/" + inputs.year4); doc.text(180, 540, inputs.month4__1 + "/" + inputs.year4__1); doc.text(290, 540, inputs.address4 + ' ' + inputs.address2_4 + ', ' + inputs.city4 + ', ' + inputs.state4 + ' ' + inputs.zip_code4);
-        doc.line(70, 543, 160, 543); doc.line(180, 543, 270, 543); doc.line(290, 543, 542, 543);
-        doc.text(70, 554, 'from Mo/Yr'); doc.text(180, 554, 'to Mo/Yr '); doc.text(290, 554, 'Street'); doc.text(455, 554, 'City, State & Zip');
+        if(inputs.month3 != "" && inputs.year3 != "" && inputs.month3__1 != "" && inputs.year3__1 != "" && inputs.address3 != "" && inputs.address2_3 != "" && inputs.city3 != "" && inputs.state3 != "" && inputs.zip_code3 != "")
+        {
+            doc.text(70, 505, inputs.month3 + "/" + inputs.year3); doc.text(170, 505, inputs.month3__1 + "/" + inputs.year3__1); doc.text(270, 505, inputs.address3 + ' ' + inputs.address2_3 + ', ' + inputs.city3 + ', ' + inputs.state3 + ' ' + inputs.zip_code3);
+        }
+        else if(inputs.month3 != "" && inputs.year3 != "" && inputs.month3__1 != "" && inputs.year3__1 != "" && inputs.address3 != "" && inputs.address2_3 == "" && inputs.city3 != "" && inputs.state3 != "" && inputs.zip_code3 != "")
+        {
+            doc.text(70, 505, inputs.month3 + "/" + inputs.year3); doc.text(170, 505, inputs.month3__1 + "/" + inputs.year3__1); doc.text(270, 505, inputs.address3 + ', ' + inputs.city3 + ', ' + inputs.state3 + ' ' + inputs.zip_code3);
+        }
+        doc.line(70, 508, 150, 508); doc.line(170, 508, 250, 508); doc.line(270, 508, 542, 508);
+        doc.text(70, 519, 'from Mo/Yr'); doc.text(170, 519, 'to Mo/Yr '); doc.text(270, 519, 'Street'); doc.text(455, 519, 'City, State & Zip');
+
+        if(inputs.month4 != "" && inputs.year4 != "" && inputs.month4__1 != "" && inputs.year4__1 != "" && inputs.address4 != "" && inputs.address2_4 != "" && inputs.city4 != "" && inputs.state4 != "" && inputs.zip_code4 != "")
+        {
+            doc.text(70, 540, inputs.month4 + "/" + inputs.year4); doc.text(170, 540, inputs.month4__1 + "/" + inputs.year4__1); doc.text(270, 540, inputs.address4 + ' ' + inputs.address2_4 + ', ' + inputs.city4 + ', ' + inputs.state4 + ' ' + inputs.zip_code4);
+        }
+        else if(inputs.month4 != "" && inputs.year4 != "" && inputs.month4__1 != "" && inputs.year4__1 != "" && inputs.address4 != "" && inputs.address2_4 == "" && inputs.city4 != "" && inputs.state4 != "" && inputs.zip_code4 != "")
+        {
+            doc.text(70, 540, inputs.month4 + "/" + inputs.year4); doc.text(170, 540, inputs.month4__1 + "/" + inputs.year4__1); doc.text(270, 540, inputs.address4 + ', ' + inputs.city4 + ', ' + inputs.state4 + ' ' + inputs.zip_code4);
+        }
+        doc.line(70, 543, 150, 543); doc.line(170, 543, 250, 543); doc.line(270, 543, 542, 543);
+        doc.text(70, 554, 'from Mo/Yr'); doc.text(170, 554, 'to Mo/Yr '); doc.text(270, 554, 'Street'); doc.text(455, 554, 'City, State & Zip');
 
         doc.addImage(signature, 'PNG', 110, 590, 116, 116);
         doc.line(70, 709, 276, 709);
@@ -385,7 +428,7 @@
         doc.line(336, 709, 542, 709);
         doc.text(336, 720, 'Date');
 
-        // ******************** NUEVA PAGINA ********************
+        // ****************** NUEVA PAGINA ******************
         doc.addPage();
         doc.setFontSize(18);
         doc.text(265, 50, 'Disclosure');
@@ -441,7 +484,7 @@
         doc.line(70, 669, 276, 669);
         doc.text(70, 680, 'Printed Name');
          
-        // ******************** NUEVA PAGINA ********************
+        // ****************** NUEVA PAGINA ******************
         doc.addPage();
         doc.setFontSize(18);
         doc.text(265, 50, 'Information');
@@ -450,24 +493,23 @@
         doc.setFontSize(12);
         if(inputs.middle != "")
         {
-            doc.text(70, 330, ('Full name: ' + inputs.name + ' ' + inputs.middle + ' ' + inputs.last_name));
+            doc.text(70, 85, ('Full name: ' + inputs.name + ' ' + inputs.middle + ' ' + inputs.last_name));
         } 
         else
         {
-            doc.text(70, 330, ('Full name: ' + inputs.name + ' ' + inputs.last_name));
+            doc.text(70, 85, ('Full name: ' + inputs.name + ' ' + inputs.last_name));
         }
-        doc.text(70, 345, ('SSN: ' + inputs.ssn));
-        doc.text(70, 360, ('Date of birth: ' + inputs.month + '/' + inputs.day + '/' + inputs.year));
-        doc.text(70, 375, ('Gender: ' + inputs.gender));
-        doc.text(70, 390, ('Phone: ' + inputs.phone));
-        doc.text(70, 405, ('Email: ' + inputs.email));
-        doc.text(70, 420, ('Phone: ' + inputs.phone));
-        doc.text(70, 435, ('T-shirt size: ' + inputs.size));
-        doc.addImage(direccion3, expresionn3, 210, 80, 200, 230);
-        doc.addImage(direccion1, expresionn, 40, 470, 260, 200);
-        doc.addImage(direccion2, expresionn2, 312, 470, 260, 200);
+        doc.text(70, 110, ('SSN: ' + inputs.ssn));
+        doc.text(70, 135, ('Date of birth: ' + inputs.month + '/' + inputs.day + '/' + inputs.year));
+        doc.text(70, 160, ('Gender: ' + inputs.gender));
+        doc.text(70, 185, ('Phone: ' + inputs.phone));
+        doc.text(70, 210, ('Email: ' + inputs.email));
+        doc.text(70, 235, ('T-shirt size: ' + inputs.size));
+        doc.addImage(direccion3, expresionn3, 402, 80, 140, 161);
+        doc.addImage(direccion1, expresionn, 70, 280, 295, 220);
+        doc.addImage(direccion2, expresionn2, 70, 510, 295, 220);
 
-        doc.save('Test.pdf');
+        doc.save('Authorization-Disclosure.pdf');
     }
 
     function ValidarInput(value, element, name) {
@@ -545,6 +587,7 @@
     var direccion1 = "";
     var loadID = document.querySelector('#txtFileID');
     loadID.addEventListener('change', function(event) {
+        console.log("Front entro");
         var reader = new FileReader();
         reader.onload = function() {
             direccion1 = reader.result;
